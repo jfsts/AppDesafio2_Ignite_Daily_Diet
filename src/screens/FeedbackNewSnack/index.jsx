@@ -10,11 +10,16 @@ import {
 } from "./styles";
 import imagemSucesso from "../../assets/imagemSucesso.png";
 import imagemQuePena from "../../assets/imagemQuePena.png";
+import { useRoute, useNavigation } from "@react-navigation/native";
 
-export function FeedbackNewSnack({ tipo }) {
+export function FeedbackNewSnack() {
+  const route = useRoute();
+  const navigation = useNavigation();
+
+  const { dieta } = route.params;
   return (
     <Container>
-      {tipo === "saiu" ? (
+      {!dieta ? (
         <>
           <Title>{"Que pena!"}</Title>
           <SubTitle>
@@ -33,7 +38,7 @@ export function FeedbackNewSnack({ tipo }) {
           <Imagem source={imagemSucesso}></Imagem>
         </>
       )}
-      <Button>
+      <Button onPress={() => navigation.navigate("home")}>
         <TitleButton>{"Ir para tela inicial"}</TitleButton>
       </Button>
     </Container>
